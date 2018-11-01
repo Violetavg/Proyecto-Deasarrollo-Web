@@ -12,7 +12,7 @@
   height: 100px;
 }
 a:link {
-  color: green;
+  color: rgb(96, 52, 126);
   background-color: transparent;
   text-decoration: none;
 }
@@ -22,7 +22,7 @@ a:visited {
   text-decoration: none;
 }
 a:hover {
-  color: red;
+  color: rgb(21, 161, 196);
   background-color: transparent;
   text-decoration: underline;
 
