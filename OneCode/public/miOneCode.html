@@ -27,13 +27,13 @@
 
       <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            <a class="nav-link" href="#">Notifications</a>
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#modalCrearProyecto">Crear un proyecto</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Profile</a>
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#modalCompartir">Compartir</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Switch account</a>
+            <a class="nav-link" href="#">Perfil</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
@@ -51,9 +51,81 @@
       </div>
     </nav>
 
+    <!-- Modal para crear un nuevo proyecto-->
+    <div class="modal fade" id="modalCrearProyecto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Crear un nuevo proyecto</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label class="col-form-label">Nombre:</label>
+                <input type="text" class="form-control" id="NombreProyecto">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Descripcion:</label>
+                <textarea class="form-control" id="descripcionProyecto"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-success">Crear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para compartir un proyecto-->
+    <div class="modal fade" id="modalCompartir" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Compartir</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Seleccione el proyecto:</label>
+                <select class="form-control" >
+                    <option value="volvo">1</option>
+                    <option value="saab">2</option>
+                    <option value="fiat">3</option>
+                    <option value="audi">4</option>
+                </select>
+              </div>
+              <div class="form-group">
+                  <label for="exampleFormControlSelect1">Compartir con:</label>
+                  <select multiple class="form-control" >
+                      <option value="volvo">1</option>
+                      <option value="saab">2</option>
+                      <option value="fiat">3</option>
+                      <option value="audi">4</option>
+                  </select>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn btn-success">Compartir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
     <div class="nav-scroller bg-white shadow-sm">
       <nav class="nav nav-underline">
-        <a class="nav-link active" href="#">Dashboard</a>
+        <a class="nav-link active" href="#"></a>
        
       </nav>
     </div>

@@ -1,14 +1,12 @@
 body{
     text-align: center;
 }
-
 textarea{
     width: 32%;
-    float: top;
     min-height: 250px;
     overflow: scroll;
-    margin: auto;
-  
+    margin-top: 70px;
+    float: none;
     background: #f4f4f9;
     outline: none;
     font-family: Courier,sans-serif;
