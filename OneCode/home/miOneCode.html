@@ -14,6 +14,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+    <link href="plugins/Magicsuggest-magicsuggest-cf74869/magicsuggest-min.css" rel="stylesheet">
     <link href="css/offcanvas.css" rel="stylesheet">
   </head>
 
@@ -35,6 +36,9 @@
           <li class="nav-item">
             <a class="nav-link" href="#" data-toggle="modal" data-target="#modalCompartir">Compartir</a>
           </li>
+          <li class="nav-item">
+              <a class="nav-link" href="carpetasCompartidas.html" >Proyectos Compartidos</a>
+            </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Perfil</a>
           </li>
@@ -126,27 +130,20 @@
             <form>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Seleccione el proyecto:</label>
-                <select class="form-control" >
-                    <option value="volvo">1</option>
-                    <option value="saab">2</option>
-                    <option value="fiat">3</option>
-                    <option value="audi">4</option>
+                <select class="form-control" id="selectProyectos" >
+                    <option value="TD">Selecione un proyecto</option>
                 </select>
               </div>
               <div class="form-group">
-                  <label for="exampleFormControlSelect1">Compartir con:</label>
-                  <select multiple class="form-control" >
-                      <option value="volvo">1</option>
-                      <option value="saab">2</option>
-                      <option value="fiat">3</option>
-                      <option value="audi">4</option>
+                  <label for="exampleFormControlSelect1">Compartir con mis contactos:</label>
+                  <select multiple class="form-control" id="selectContactos">
                   </select>
                 </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn btn-success">Compartir</button>
+            <button type="button" class="btn btn btn-success" id="btnCompartir">Compartir</button>
           </div>
         </div>
       </div>
@@ -164,9 +161,23 @@
     <main role="main" class="container">
 
       <div class="my-3 p-3 bg-white rounded shadow-sm" width="100%">
-        <h6 class="border-bottom border-gray pb-2 mb-0">Proyectos Personales</h6>
+        <h6 class="border-bottom border-gray pb-2 mb-0">Carpetas</h6>
         <div class="container-fluid">
           <div id="contenido" class="row">
+        
+          </div>
+        </div> 
+       
+        
+        <small class="d-block text-right mt-3">
+          <a href="#">All updates</a>
+        </small>
+      </div>
+
+      <div class="my-3 p-3 bg-white rounded shadow-sm" width="100%">
+        <h6 class="border-bottom border-gray pb-2 mb-0">Proyectos</h6>
+        <div class="container-fluid">
+          <div id="contenedorProyectos" class="row">
         
           </div>
         </div> 
@@ -194,6 +205,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/holder.min.js"></script>
     <script src="js/offcanvas.js"></script>
+    <script src="plugins/Magicsuggest-magicsuggest-cf74869/magicsuggest-min.js"></script>
     <script src="js/controladorhome.js"></script>
   </body>
 </html>

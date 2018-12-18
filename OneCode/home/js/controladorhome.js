@@ -68,6 +68,52 @@ function abrirCarpeta(){
 	alert("Ha abierto la carpeta")
 }
 
+$("#btnCompartir").click(function () {
+    if ($("#selectProyectos").val() == "")
+        alert("Debe selecionar un proyecto");
+    else if ($("#selectContactos").val() == "")
+            alert("Debe selecionar con quien compartir");
+	else {
+        console.log($("#selectContactos").val());
+        var arreglo = $("#selectContactos").val();
+        for (var i = 0; i < arreglo.length; i++){
+            var parametros = "proyecto=" + $("#selectProyectos").val() + "&usuarioMiembro=" + arreglo[i];
+		    $.ajax({
+		    	url: "/compartir-proyecto",
+		    	data: parametros,
+		    	method: "POST",
+		    	dataType: "json",
+		    	success: function (respuesta) {
+		    		alert("El proyecto ha sido compartido");
+		    	}
+		    });
+        }
+		
+	}
+});
 $(document).ready(function () {
-	cargarCarpetas(0);
+    cargarCarpetas(0);
+
+    $.ajax({
+        url: "/select-contactos",
+        dataType: "json",
+        success:function(respuesta){
+			for(var i=0; i<respuesta.length; i++){
+				
+				$("#selectContactos").append('<option value="'+respuesta[i].CODIGO_USUARIO+'">'+respuesta[i].NOMBRE_USUARIO+'</option>');
+			}
+		}
+    });
+
+    $.ajax({
+        url: "/select-proyectos",
+        dataType: "json",
+        success:function(respuesta){
+			for(var i=0; i<respuesta.length; i++){
+				
+				$("#selectProyectos").append('<option value="'+respuesta[i].CODIGO_PROYECTO+'">'+respuesta[i].NOMBRE_PROYECTO+'</option>');
+			}
+		}
+    });
+
 });

@@ -204,4 +204,81 @@ app.get("/cargar-carpetas", verificarAutenticacion, function (request, response)
                 });
 });
 
+app.get("/select-proyectos", function(request, response){
+        var conexion = mysql.createConnection(credenciales);
+        var sql = `SELECT CODIGO_PROYECTO, NOMBRE_PROYECTO FROM TBL_PROYECTO WHERE CODIGO_USUARIO_AUTOR = ?`;
+        var proyectos = [];
+        conexion.query(sql,[request.session.codigoUsuario])
+        .on("result", function(resultado){
+            proyectos.push(resultado);
+        })
+        .on("end",function(){
+            response.send(proyectos);
+        });   
+});
+
+app.get("/select-contactos", function(request, response){
+        var conexion = mysql.createConnection(credenciales);
+        var sql = `SELECT CODIGO_USUARIO, NOMBRE_USUARIO
+        FROM TBL_USUARIO A 
+        WHERE (A.CODIGO_USUARIO IN(
+            SELECT CODIGO_USUARIO_CONTACTO FROM TBL_CONTACTOS WHERE CODIGO_USUARIO = ?)) AND (CODIGO_USUARIO != ?)`;
+        var contactos = [];
+        conexion.query(sql,[request.session.codigoUsuario, request.session.codigoUsuario])
+        .on("result", function(resultado){
+            contactos.push(resultado);
+        })
+        .on("end",function(){
+            response.send(contactos);
+        });   
+});
+
+app.get("/select-usuarios", function(request, response){
+        var conexion = mysql.createConnection(credenciales);
+        var sql = `SELECT CODIGO_USUARIO, NOMBRE_USUARIO
+        FROM TBL_USUARIO A 
+        WHERE (A.CODIGO_USUARIO NOT IN(
+            SELECT CODIGO_USUARIO_CONTACTO FROM TBL_CONTACTOS WHERE CODIGO_USUARIO = ?)) AND (CODIGO_USUARIO != ?)`;
+        var usuarios = [];
+        conexion.query(sql, [request.session.codigoUsuario, request.session.codigoUsuario])
+        .on("result", function(resultado){
+             usuarios.push(resultado);
+        })
+        .on("end",function(){
+            response.send(usuarios);
+        });   
+});
+
+app.post("/compartir-proyecto", function(request, response){
+        var conexion = mysql.createConnection(credenciales);
+        var sql = 'INSERT INTO tbl_grupos_de_trabajo (CODIGO_PROYECTO, CODIGO_USUARIO_MIEMBRO, FECHA_COMPARTIDO) VALUES (?, ?, NOW())';
+        
+        conexion.query(
+            sql,
+            [request.body.proyecto, request.body.usuarioMiembro],
+            function(err, result){
+                if (err) throw err;
+                response.send(result);
+            }
+        ); 
+});
+
+app.get("/cargar-carpetasCompartidasConmigo", verificarAutenticacion, function (request, response) {
+        var conexion = mysql.createConnection(credenciales);
+        var sql = `SELECT NOMBRE_PROYECTO FROM tbl_proyecto A 
+        INNER JOIN tbl_grupos_de_trabajo B
+        ON A.CODIGO_PROYECTO = B.CODIGO_PROYECTO
+        WHERE B.CODIGO_USUARIO_MIEMBRO = ?`;
+        var carpetasCompartidas = [];
+        conexion.query(sql, [request.session.codigoUsuario])
+                .on("result", function (resultado) {
+                        carpetasCompartidas.push(resultado);
+                })
+                .on("end", function () {
+                        response.send(carpetasCompartidas);
+                });
+});
+
+
+
 app.listen(8111, function(){ console.log("Servidor Iniciado");});
