@@ -161,6 +161,47 @@ app.get("/obtener-usuario", verificarAutenticacion, function(request, response){
         .on("end",function(){
             response.send(usuarios);
         });   
-    });
+});
+
+app.post("/crear-carpeta", verificarAutenticacion, function (request, response) {
+        var conexion = mysql.createConnection(credenciales);
+        var filtros = [];
+        if (request.body.carpetaContenedora == 0) {
+                var sql = `INSERT INTO TBL_CARPETA(CODIGO_USUARIO_DUENIO, FECHA_CREACION, NOMBRE_CARPETA) VALUES (?,NOW(),?)`;
+                filtros = [request.session.codigoUsuario, request.body.nombreCarpeta]
+        } else {
+                var sql = `INSERT INTO TBL_CARPETA(CODIGO_CARPETA_CONTENEDORA, CODIGO_USUARIO_DUENIO, FECHA_CREACION, NOMBRE_CARPETA) VALUES (?,?,NOW(),?)`;
+                filtros = [request.body.carpetaContenedora, request.session.codigoUsuario, request.body.nombreCarpeta]
+        }
+
+        conexion.query(
+                sql,
+                filtros,
+                function (err, result) {
+                        if (err) throw err;
+                        response.send(result);
+                }
+        );
+});
+
+app.get("/cargar-carpetas", verificarAutenticacion, function (request, response) {
+        var conexion = mysql.createConnection(credenciales);
+        var filtros = [];
+        if (request.query.carpetaContenedora == 0) {
+                var sql = `SELECT CODIGO_CARPETA, NOMBRE_CARPETA FROM TBL_CARPETA WHERE (CODIGO_USUARIO_DUENIO = ?) AND (CODIGO_CARPETA_CONTENEDORA IS NULL)`;
+                filtros = [request.session.codigoUsuario];
+        } else {
+                var sql = `SELECT CODIGO_CARPETA, NOMBRE_CARPETA FROM TBL_CARPETA WHERE (CODIGO_USUARIO_DUENIO = ?) AND (CODIGO_CARPETA_CONTENEDORA = ?)`;
+                filtros = [request.session.codigoUsuario, request.query.carpetaContenedora];
+        }
+        var carpetas = [];
+        conexion.query(sql, filtros)
+                .on("result", function (resultado) {
+                        carpetas.push(resultado);
+                })
+                .on("end", function () {
+                        response.send(carpetas);
+                });
+});
 
 app.listen(8111, function(){ console.log("Servidor Iniciado");});
