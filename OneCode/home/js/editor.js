@@ -29,13 +29,51 @@ $(document).ready(function () {
         success: function (respuesta) {
             console.log(respuesta);
             for (var i = 0; i < respuesta.length; i++) {
-                if (respuesta[i].COD_TIPO_ARCHIVO == 1)
+                if (respuesta[i].COD_TIPO_ARCHIVO == 1){
                     $("#html").html(respuesta[i].CONTENIDO);
-                else if (respuesta[i].COD_TIPO_ARCHIVO == 2)
+                    $("#tipoHtml").html(respuesta[i].CODIGO_ARCHIVO);
+                }
+                else if (respuesta[i].COD_TIPO_ARCHIVO == 2){
                     $("#css").html(respuesta[i].CONTENIDO);
-                else if (respuesta[i].COD_TIPO_ARCHIVO == 3)
+                    $("#tipoCss").html(respuesta[i].CODIGO_ARCHIVO);
+                }
+                else if (respuesta[i].COD_TIPO_ARCHIVO == 3){
                     $("#javascript").html(respuesta[i].CONTENIDO);
+                    $("#tipoJs").html(respuesta[i].CODIGO_ARCHIVO);
+                }
             }
         }
     });
+});
+
+$("#btnGuardarArchivos").click(function () {
+    $.ajax({
+        url: "/guardar-archivo",
+        data: "codigoArchivo=" +$("#tipoHtml").text() + "&contenido=" + $("#html").val(),
+        method: "POST",
+        dataType: "json",
+        success: function (respuesta) {
+            console.log("html guardado con exito");
+            
+        }
+    });
+    $.ajax({
+        url: "/guardar-archivo",
+        data: "codigoArchivo=" +$("#tipoCss").text() + "&contenido=" + $("#css").val(),
+        method: "POST",
+        dataType: "json",
+        success: function (respuesta) {
+            console.log("css guardado con exito");
+        }
+    });
+    $.ajax({
+        url: "/guardar-archivo",
+        data: "codigoArchivo=" +$("#tipoJs").text() + "&contenido=" + $("#javascript").val(),
+        method: "POST",
+        dataType: "json",
+        success: function (respuesta) {
+            console.log("js guardado con exito");
+        }
+    });
+    
 });

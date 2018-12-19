@@ -22,7 +22,7 @@
                   <a class="nav-link" href="#" data-toggle="modal" data-target="#modalCrearSnippet">Crear un Snippet</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#" data-toggle="modal" data-target="#modalCompartir">Compartir</a>
+                  <a class="nav-link" href="" role="button" id="btnGuardarArchivos">Guardar</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Perfil</a>
@@ -37,7 +37,6 @@
                 </li>
               </ul>
               <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                 <button class="btn btn-info my-2 my-sm-0" type="button" id="salir">Salir</button>
               </form>
             </div>
@@ -47,7 +46,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">Crear un nuevo proyecto</h5>
+            <h5 class="modal-title" id="exampleModalCenterTitle">Crear un nuevo snippet</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -71,49 +70,13 @@
         </div>
       </div>
     </div>
-    <!-- Modal para compartir un proyecto-->
-    <div class="modal fade" id="modalCompartir" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">Compartir</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Seleccione el proyecto:</label>
-                <select class="form-control" >
-                    <option value="volvo">1</option>
-                    <option value="saab">2</option>
-                    <option value="fiat">3</option>
-                    <option value="audi">4</option>
-                </select>
-              </div>
-              <div class="form-group">
-                  <label for="exampleFormControlSelect1">Compartir con:</label>
-                  <select multiple class="form-control" >
-                      <option value="volvo">1</option>
-                      <option value="saab">2</option>
-                      <option value="fiat">3</option>
-                      <option value="audi">4</option>
-                  </select>
-                </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn btn-success">Compartir</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
         </form><textarea id="html" placeholder="HTML"></textarea>
+        <span style="visibility: hidden" id="tipoHtml"></span>
         </form><textarea id="css" placeholder="CSS"></textarea>
+        <span style="visibility: hidden" id="tipoCss"></span>
         </form><textarea id="javascript" placeholder="JavaScript"></textarea>
+        <span style="visibility: hidden" id="tipoJs"></span>
         </form><iframe id="codigo"></iframe>
 
 

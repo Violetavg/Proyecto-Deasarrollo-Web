@@ -362,5 +362,19 @@ app.get("/cargarInformacionProyecto", function (request, response) {
                 });
 });
 
+app.post("/guardar-archivo", verificarAutenticacion, function (request, response) {
+        var conexion = mysql.createConnection(credenciales);
+        var sql = `UPDATE TBL_ARCHIVOS SET CONTENIDO = ? WHERE CODIGO_ARCHIVO = ?`
+        conexion.query(
+                sql,
+                [request.body.contenido, request.body.codigoArchivo],
+                function (err, result) {
+                        if (err) throw err;
+                        response.send({mensaje:"guardado"});
+                }
+        );
+        
+});
+
 
 app.listen(8111, function () { console.log("Servidor Iniciado"); });
