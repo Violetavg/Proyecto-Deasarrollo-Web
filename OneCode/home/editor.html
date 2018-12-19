@@ -70,19 +70,43 @@
         </div>
       </div>
     </div>
-
-        </form><textarea id="html" placeholder="HTML"></textarea>
-        <span style="visibility: hidden" id="tipoHtml"></span>
-        </form><textarea id="css" placeholder="CSS"></textarea>
-        <span style="visibility: hidden" id="tipoCss"></span>
-        </form><textarea id="javascript" placeholder="JavaScript"></textarea>
-        <span style="visibility: hidden" id="tipoJs"></span>
-        </form><iframe id="codigo"></iframe>
+        <div class="row">
+            <div class="editor col-4" id="html" placeholder="HTML"></div>
+            <div class="editor col-4" id="css" placeholder="CSS"></div>
+            <div class="editor col-4" id="javascript" placeholder="JavaScript"></div>
+            <span style="visibility: hidden" id="tipoHtml"></span>
+            <span style="visibility: hidden" id="tipoCss"></span>
+            <span style="visibility: hidden" id="tipoJs"></span>
+          </div>
+            <iframe id="codigo"></iframe>
 
 
     <script src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/editor.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="/ace-builds/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      var editorhtml = ace.edit("html");
+      editorhtml.session.setMode("ace/mode/html");
+      var editorcss = ace.edit("css");
+      editorcss.session.setMode("ace/mode/css");
+      var editorjs = ace.edit("javascript");
+      editorjs.session.setMode("ace/mode/javascript");
+
+  </script>
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  </head>
+  <body>
+    
+  </body>
+  </html>
     
 </body>
 </html>

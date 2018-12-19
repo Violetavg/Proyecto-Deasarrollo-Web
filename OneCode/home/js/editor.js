@@ -1,18 +1,15 @@
 function compilar() {
-    var html = document.getElementById("html");
-    var css = document.getElementById("css");
-    var js = document.getElementById("javascript");
     var codigo = document.getElementById("codigo").contentWindow.document;
 
     document.body.onkeyup = function () {
         codigo.open();
         codigo.writeln(
-            html.value +
+            editorhtml.getValue() +
             "<style>" +
-            css.value +
+            editorcss.getValue() +
             "</style>" +
             "<script>" +
-            js.value +
+            editorjs.getValue() +
             "</script>"
         );
         codigo.close();
@@ -23,6 +20,7 @@ function compilar() {
 compilar();
 
 $(document).ready(function () {
+    
     $.ajax({
         url: "/cargarInformacionProyecto",
         dataType: "json",
@@ -30,15 +28,15 @@ $(document).ready(function () {
             console.log(respuesta);
             for (var i = 0; i < respuesta.length; i++) {
                 if (respuesta[i].COD_TIPO_ARCHIVO == 1){
-                    $("#html").html(respuesta[i].CONTENIDO);
+                    editorhtml.setValue(respuesta[i].CONTENIDO);
                     $("#tipoHtml").html(respuesta[i].CODIGO_ARCHIVO);
                 }
                 else if (respuesta[i].COD_TIPO_ARCHIVO == 2){
-                    $("#css").html(respuesta[i].CONTENIDO);
+                    editorcss.setValue(respuesta[i].CONTENIDO);
                     $("#tipoCss").html(respuesta[i].CODIGO_ARCHIVO);
                 }
                 else if (respuesta[i].COD_TIPO_ARCHIVO == 3){
-                    $("#javascript").html(respuesta[i].CONTENIDO);
+                    editorjs.setValue(respuesta[i].CONTENIDO);
                     $("#tipoJs").html(respuesta[i].CODIGO_ARCHIVO);
                 }
             }
@@ -49,7 +47,7 @@ $(document).ready(function () {
 $("#btnGuardarArchivos").click(function () {
     $.ajax({
         url: "/guardar-archivo",
-        data: "codigoArchivo=" +$("#tipoHtml").text() + "&contenido=" + $("#html").val(),
+        data: "codigoArchivo=" +$("#tipoHtml").text() + "&contenido=" + editorhtml.getValue(),
         method: "POST",
         dataType: "json",
         success: function (respuesta) {
@@ -59,7 +57,7 @@ $("#btnGuardarArchivos").click(function () {
     });
     $.ajax({
         url: "/guardar-archivo",
-        data: "codigoArchivo=" +$("#tipoCss").text() + "&contenido=" + $("#css").val(),
+        data: "codigoArchivo=" +$("#tipoCss").text() + "&contenido=" + editorcss.getValue(),
         method: "POST",
         dataType: "json",
         success: function (respuesta) {
@@ -68,7 +66,7 @@ $("#btnGuardarArchivos").click(function () {
     });
     $.ajax({
         url: "/guardar-archivo",
-        data: "codigoArchivo=" +$("#tipoJs").text() + "&contenido=" + $("#javascript").val(),
+        data: "codigoArchivo=" +$("#tipoJs").text() + "&contenido=" + editorjs.getValue(),
         method: "POST",
         dataType: "json",
         success: function (respuesta) {

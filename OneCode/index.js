@@ -364,7 +364,7 @@ app.get("/cargarInformacionProyecto", function (request, response) {
 
 app.post("/guardar-archivo", verificarAutenticacion, function (request, response) {
         var conexion = mysql.createConnection(credenciales);
-        var sql = `UPDATE TBL_ARCHIVOS SET CONTENIDO = ? WHERE CODIGO_ARCHIVO = ?`
+        var sql = `UPDATE TBL_ARCHIVOS SET CONTENIDO = ? , FECHA_ULTIMA_EDICION = NOW() WHERE CODIGO_ARCHIVO = ?`
         conexion.query(
                 sql,
                 [request.body.contenido, request.body.codigoArchivo],
