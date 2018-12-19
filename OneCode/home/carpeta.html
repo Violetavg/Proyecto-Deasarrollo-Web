@@ -14,6 +14,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+    <link href="plugins/Magicsuggest-magicsuggest-cf74869/magicsuggest-min.css" rel="stylesheet">
     <link href="css/offcanvas.css" rel="stylesheet">
   </head>
 
@@ -27,11 +28,17 @@
 
       <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            <a class="nav-link" href="#" data-toggle="modal" data-target="#modalCrearProyecto">Crear un proyecto</a>
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#modalCrearProyecto">Crear un Proyecto</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#modalCrearCarpeta">Crear una Carpeta</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" data-toggle="modal" data-target="#modalCompartir">Compartir</a>
           </li>
+          <li class="nav-item">
+              <a class="nav-link" href="carpetasCompartidas.html" >Proyectos Compartidos</a>
+            </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Perfil</a>
           </li>
@@ -75,7 +82,35 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-success">Crear</button>
+            <button type="button" class="btn btn-success" id="btnCrearProyecto">Crear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para crear una carpeta-->
+    <div class="modal fade" id="modalCrearCarpeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Crear una Carpeta</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label class="col-form-label">Nombre:</label>
+                <input type="text" class="form-control" id="nombreCarpeta">
+                <label class="col-form-label">carpeta contenedora:</label>
+                <input type="text" class="form-control" id="carpetaContenedora">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-success" id="btnCrearCarpeta">Crear</button>
           </div>
         </div>
       </div>
@@ -95,27 +130,20 @@
             <form>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Seleccione el proyecto:</label>
-                <select class="form-control" >
-                    <option value="volvo">1</option>
-                    <option value="saab">2</option>
-                    <option value="fiat">3</option>
-                    <option value="audi">4</option>
+                <select class="form-control" id="selectProyectos" >
+                    <option value="TD">Selecione un proyecto</option>
                 </select>
               </div>
               <div class="form-group">
-                  <label for="exampleFormControlSelect1">Compartir con:</label>
-                  <select multiple class="form-control" >
-                      <option value="volvo">1</option>
-                      <option value="saab">2</option>
-                      <option value="fiat">3</option>
-                      <option value="audi">4</option>
+                  <label for="exampleFormControlSelect1">Compartir con mis contactos:</label>
+                  <select multiple class="form-control" id="selectContactos">
                   </select>
                 </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn btn-success">Compartir</button>
+            <button type="button" class="btn btn btn-success" id="btnCompartir">Compartir</button>
           </div>
         </div>
       </div>
@@ -133,86 +161,17 @@
     <main role="main" class="container">
 
       <div class="my-3 p-3 bg-white rounded shadow-sm" width="100%">
-        <h6 class="border-bottom border-gray pb-2 mb-0">Proyectos Personales</h6>
+        <h6 class="border-bottom border-gray pb-2 mb-0" id="infoCarpeta">Nombre de la carpeta</h6>
+        <input type="hidden" id="codigoCarpeta">
         <div class="container-fluid">
-          <div id="contenido" class="row">
-              <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12 col-12">
-                  <div class="estilosvideos">
-                       <div class=" dimensiones">
-                        <a href="editor.html"><h6>ProyectoS</h6></a>
-                      </div>
-                       
-                       <img src="img/glyphicons-145-folder-open.png" alt="" class="mr-2 rounded">
-                  </div>     
-                </div>
-           <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12 col-12">
-              <div class="estilosvideos">
-                   <div class=" dimensiones">
-                    <a href="test.html"><h6 style="color: rgb(21, 135, 180);">ProyectoS hsdygsuygc bxcbjhas audhiagbad</h6></a>
-                  </div>
-                   
-                   <img src="img/glyphicons-145-folder-open.png" alt="" class="mr-2 rounded">
-              </div>     
-            </div>
-         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12 col-12">
-            <div class="estilosvideos">
-                 <div class=" dimensiones">
-                  <a href="test.html"><h6>ProyectoS</h6></a>
-                </div>
-                 
-                 <img src="img/glyphicons-145-folder-open.png" alt="" class="mr-2 rounded">
-            </div>     
-          </div>
-       <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12 col-12">
-          <div class="estilosvideos">
-               <div class=" dimensiones">
-                <a href="test.html"><h6>ProyectoS</h6></a>
-              </div>
-               
-               <img src="img/glyphicons-145-folder-open.png" alt="" class="mr-2 rounded">
-          </div>     
-        </div>
-     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12 col-12">
-        <div class="estilosvideos">
-             <div class=" dimensiones">
-              <a href="test.html"><h6>ProyectoS</h6></a>
-            </div>
-             
-             <img src="img/glyphicons-145-folder-open.png" alt="" class="mr-2 rounded">
-        </div>     
-      </div>
-   <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12 col-12">
-      <div class="estilosvideos">
-           <div class=" dimensiones">
-            <a href="test.html"><h6>ProyectoS</h6></a>
-          </div>
-           
-           <img src="img/glyphicons-145-folder-open.png" alt="" class="mr-2 rounded">
-      </div>     
-    </div>
- <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12 col-12">
-  <div class="estilosvideos">
-       <div class=" dimensiones">
-        <a href="test.html"><h6>ProyectoS</h6></a>
-      </div>
-       
-       <img src="img/glyphicons-145-folder-open.png" alt="" class="mr-2 rounded">
-  </div>     
-</div>
+          <div id="contenidoCarpeta" class="row">
+        
           </div>
         </div> 
        
         
         <small class="d-block text-right mt-3">
           <a href="#">All updates</a>
-        </small>
-      </div>
-
-      <div class="my-3 p-3 bg-white rounded shadow-sm">
-        <h6 class="border-bottom border-gray pb-2 mb-0">Proyectos Compartidos</h6>
-        
-        <small class="d-block text-right mt-3">
-          <a href="#">All suggestions</a>
         </small>
       </div>
     </main>
@@ -225,6 +184,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/holder.min.js"></script>
     <script src="js/offcanvas.js"></script>
+    <script src="plugins/Magicsuggest-magicsuggest-cf74869/magicsuggest-min.js"></script>
     <script src="js/controladorhome.js"></script>
   </body>
 </html>

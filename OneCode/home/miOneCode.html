@@ -82,7 +82,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-success">Crear</button>
+            <button type="button" class="btn btn-success" id="btnCrearProyecto">Crear</button>
           </div>
         </div>
       </div>
@@ -103,8 +103,6 @@
               <div class="form-group">
                 <label class="col-form-label">Nombre:</label>
                 <input type="text" class="form-control" id="nombreCarpeta">
-                <label class="col-form-label">carpeta contenedora:</label>
-                <input type="text" class="form-control" id="carpetaContenedora">
               </div>
             </form>
           </div>
@@ -161,7 +159,8 @@
     <main role="main" class="container">
 
       <div class="my-3 p-3 bg-white rounded shadow-sm" width="100%">
-        <h6 class="border-bottom border-gray pb-2 mb-0">Carpetas</h6>
+        <h6 class="border-bottom border-gray pb-2 mb-0" id="encabezado">Carpetas</h6>
+        <span style="visibility: hidden" id="codigoCarpeta"></span>
         <div class="container-fluid">
           <div id="contenido" class="row">
         
@@ -185,14 +184,6 @@
         
         <small class="d-block text-right mt-3">
           <a href="#">All updates</a>
-        </small>
-      </div>
-
-      <div class="my-3 p-3 bg-white rounded shadow-sm">
-        <h6 class="border-bottom border-gray pb-2 mb-0">Proyectos Compartidos</h6>
-        
-        <small class="d-block text-right mt-3">
-          <a href="#">All suggestions</a>
         </small>
       </div>
     </main>

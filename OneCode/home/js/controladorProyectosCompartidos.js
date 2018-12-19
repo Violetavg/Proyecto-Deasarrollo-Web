@@ -1,6 +1,6 @@
 function cargarCompartidoConmigo(){
 	$.ajax({
-        url: "/cargar-carpetasCompartidasConmigo",
+        url: "/cargar-proyectosCompartidasConmigo",
         method: "GET",
         dataType: "json",
         success: function (respuesta) {
