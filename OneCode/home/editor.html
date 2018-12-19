@@ -22,10 +22,9 @@
                   <a class="nav-link" href="#" data-toggle="modal" data-target="#modalCrearSnippet">Crear un Snippet</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="" role="button" id="btnGuardarArchivos">Guardar</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Perfil</a>
+                  <a class="nav-link" href="#" data-toggle="modal" data-target="#modalBuscarSnippet">Buscar Snippet</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
@@ -35,6 +34,18 @@
                     <a class="dropdown-item" href="#">Something else here</a>
                   </div>
                 </li>
+                <form class="form-inline my-2 my-lg-0">
+                  <button class="btn btn-primary my-2 my-sm-0 m-1" type="button" id="btnGuardarArchivos">Guardar Cambios</button>
+                </form>
+                <form class="form-inline my-2 my-lg-0">
+                    <button class="btn btn-primary my-2 my-sm-0 m-1" type="button" id="descargarHTML">Descargar HTML</button>
+                </form>
+                <form class="form-inline my-2 my-lg-0">
+                    <button class="btn btn-primary my-2 my-sm-0 m-1" type="button" id="descargarCSS">Descargar CSS</button>
+                </form>
+                <form class="form-inline my-2 my-lg-0">
+                    <button class="btn btn-primary my-2 my-sm-0 m-1" type="button" id="descargarJavascript">Descargar JS</button>
+                </form>
               </ul>
               <form class="form-inline my-2 my-lg-0">
                 <button class="btn btn-info my-2 my-sm-0" type="button" id="salir">Salir</button>
@@ -55,21 +66,62 @@
             <form>
               <div class="form-group">
                 <label class="col-form-label">Nombre:</label>
-                <input type="text" class="form-control" id="NombreProyecto">
+                <input type="text" class="form-control" id="NombreSnippet">
               </div>
               <div class="form-group">
-                <label for="message-text" class="col-form-label">Descripcion:</label>
-                <textarea class="form-control" id="descripcionProyecto"></textarea>
+                <label for="message-text" class="col-form-label">Contenido:</label>
+                <textarea class="form-control" id="contenidoSnippet"></textarea>
+              </div>
+              <div class="form-group">
+                <select class="form-control" id="tipoArchivoSnippet" >
+                  <option value="1">HTML</option>
+                  <option value="2">CSS</option>
+                  <option value="3">JavaScript</option>
+                </select>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-success">Crear</button>
+            <button type="button" class="btn btn-success" id="crearSnippet">Crear</button>
           </div>
         </div>
       </div>
     </div>
+    <!-- Modal para busacr un snippet-->
+    <div class="modal fade" id="modalBuscarSnippet" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Buscar Snippet</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label class="col-form-label">Nombre:</label>
+                <input type="text" class="form-control" id="NombreSnippetBuscar">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label" >Tipo Snippet:</label>
+                <label for="message-text" class="col-form-label" id="tipoSnippetEncontrado" ></label>
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Contenido:</label>
+                <textarea class="form-control" id="contenidoSnippetEncontrado"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-success" id="buscarSnippet">Buscar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
         <div class="row">
             <div class="editor col-4" id="html" placeholder="HTML"></div>
             <div class="editor col-4" id="css" placeholder="CSS"></div>
@@ -84,6 +136,7 @@
     <script src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/editor.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/controlador.js"></script>
     <script src="/ace-builds/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
     <script>
       var editorhtml = ace.edit("html");

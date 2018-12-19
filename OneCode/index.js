@@ -376,5 +376,42 @@ app.post("/guardar-archivo", verificarAutenticacion, function (request, response
         
 });
 
+app.post("/crear-snippet", verificarAutenticacion, function (request, response) {
+        var conexion = mysql.createConnection(credenciales);
+        var sql = `INSERT INTO TBL_SNIPPETS(CODIGO_TIPO_ARCHIVO, NOMBRE_SNIPPET, CONTENIDO) VALUES (?,?,?)`;
+        var filtros = [request.body.tipoArchivoSnippet, request.body.nombreSnippet, request.body.contenidoSnippet]
+
+        conexion.query(
+                sql,
+                filtros,
+                function (err, result) {
+                        if (err) throw err;
+                        response.send(result);
+                }
+        );
+})
+
+app.post("/buscar-snippet", function (peticion, respuesta) {
+        var conexion = mysql.createConnection(credenciales);
+        var sql = `SELECT A.CODIGO_TIPO_ARCHIVO, A.CONTENIDO, A.NOMBRE_SNIPPET, B.NOMBRE_TIPO_ARCHIVO
+        FROM tbl_snippets A
+        INNER JOIN tbl_tipo_archivo B ON A.CODIGO_TIPO_ARCHIVO = B.CODIGO_TIPO_ARCHIVO 
+        WHERE LOWER(NOMBRE_SNIPPET) LIKE LOWER(?)`;
+        var filtros = [peticion.body.nombreSnippet]
+
+        conexion.query(
+                sql,
+                filtros,
+                function (err, data, fields) {
+                        if (data.length > 0) {
+                                data[0].estatus = 0;
+                                respuesta.send(data[0]);
+                        } else {
+                                respuesta.send({ estatus: 1, mensaje: "Snippet no encontrado" });
+                        }
+                }
+        );
+});
+
 
 app.listen(8111, function () { console.log("Servidor Iniciado"); });

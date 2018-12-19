@@ -8,15 +8,6 @@
 });
 */
 
-$("#salir").click(function () {
-    $.ajax({
-        url: "/salir",
-        success: function (respuesta) {
-            window.location.href = "/login.html";
-        }
-    });
-});
-
 $("#btnCrearCarpeta").click(function () {
     if ($("#nombreCarpeta").val() == "")
         alert("La carpeta debe tener nombre");
@@ -103,14 +94,15 @@ function cargarProyectos(carpeta) {
             for (var i = 0; i < respuesta.length; i++) {
                 $("#contenedorProyectos").append( //luego de aqui aplicar los estilos, poner nombre de carpeta, etc.
                     `<div class="col-xl-2 col-lg-3 col-md-4 col-sm-12 col-12">
-					<div class="estilosvideos">
+					<div class="estilosProyectos">
 					  <div class=" dimensiones">
 						<a href="#" onclick="abrirProyecto(${respuesta[i].CODIGO_PROYECTO});">
-						  <h6>${respuesta[i].NOMBRE_PROYECTO}</h6>
-						</a>
-					  </div>
-		
-					  <img src="" alt="" class="mr-2 rounded">
+                          <h6>${respuesta[i].NOMBRE_PROYECTO}</h6>
+                          <span style="visibility: hidden" id="codigoProyecto">${respuesta[i].CODIGO_PROYECTO}</span>
+                        </a>
+                        <img src="" alt="" class="mr-2 rounded">
+                      </div>
+                      <a class="nav-link" href="#" data-toggle="modal" data-target="#modalCompartir" style="color:rgb(180, 26, 154)">Compartir</a>
 					</div>
 				  </div>`
                 );
@@ -140,15 +132,14 @@ function abrirCarpeta(nombre, codigo) {
 }
 
 $("#btnCompartir").click(function () {
-    if ($("#selectProyectos").val() == "")
-        alert("Debe selecionar un proyecto");
-    else if ($("#selectContactos").val() == "")
+    console.log($("#codigoProyecto").val());
+    if ($("#selectContactos").val() == "")
         alert("Debe selecionar con quien compartir");
     else {
         console.log($("#selectContactos").val());
         var arreglo = $("#selectContactos").val();
         for (var i = 0; i < arreglo.length; i++) {
-            var parametros = "proyecto=" + $("#selectProyectos").val() + "&usuarioMiembro=" + arreglo[i];
+            var parametros = "proyecto=" + $("#codigoProyecto").text() + "&usuarioMiembro=" + arreglo[i];
             $.ajax({
                 url: "/compartir-proyecto",
                 data: parametros,
@@ -158,6 +149,8 @@ $("#btnCompartir").click(function () {
                     alert("El proyecto ha sido compartido");
                 }
             });
+            $("#modalCompartir").modal('toggle');
+            $("#codigoCarpeta").html("");
         }
 
     }
